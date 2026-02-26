@@ -1,0 +1,80 @@
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(247, 243, 243);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  * {
+  box-sizing: border-box;
+}
+
+.login-container {
+  background: linear-gradient(to right, rgb(71, 190, 255), rgb(112, 237, 255));
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 600px;   /* más grande */
+  margin: auto;
+  text-align: center;
+}
+
+.login-container h1 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #080808;
+}
+
+@media (min-width: 1024px) {
+  .login-container {
+    max-width: 550px;  /* más grande en laptop */
+    padding: 60px 50px;
+  }
+
+  .login-container h1 {
+    font-size: 28px;
+  }
+}
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 7px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0a0a0a;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #e2dfdf;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+
+    }
+    button:hover { background: #00906a; }
+
+    .mensaje {
+      margin-top: 15px;
+      font-size: 14px;
+      color: red;
+      display: none;
+    }

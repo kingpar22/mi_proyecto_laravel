@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZaguNet - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/estilo_login.css">
+  </head>
+<body>
+  <div class="login-container">
+    <h1>Login ZaguNet</h1>
+    <form id="loginForm">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" required>
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Ingresar</button>
+      <p class="mensaje" id="mensajeError"></p>
+    </form>
+  </div>
+
+  <script>
+
+const form = document.getElementById("loginForm");
+const mensaje = document.getElementById("mensajeError");
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const usuario = document.getElementById("usuario").value;
+  const password = document.getElementById("password").value;
+
+  try {
+
+    const response = await fetch("http://127.0.0.1:8000/api/login", {
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        email: usuario,
+        password: password
+      })
+
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+
+      // guardar token
+      localStorage.setItem("token", data.token);
+
+      alert("✅ Bienvenido " + data.usuario);
+
+      window.location.href = "http://127.0.0.1:8000/dashboard.html";
+
+    }else{
+
+      mensaje.textContent = "Credenciales incorrectas";
+      mensaje.style.display = "block";
+
+    }
+
+  } catch (error) {
+
+    mensaje.textContent = "Error al conectar con el servidor";
+    mensaje.style.display = "block";
+
+  }
+
+});
+
+const token = localStorage.getItem("token");
+
+if(!token){
+    window.location.href = "login.html";
+}
+  </script>
+</body>
+</html>

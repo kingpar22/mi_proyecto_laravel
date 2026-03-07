@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
  
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/usuario/{nombre}', [UsuarioController::class, 'mostrar']);
 

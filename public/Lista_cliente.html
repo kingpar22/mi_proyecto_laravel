@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lista de Clientes</title>
+
+<link rel="stylesheet" href="css/Lista_clientes.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+
+<div class="top-left">
+<button class="menu-btn">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+
+<div class="top-right">
+
+<span><i class="fas fa-question-circle"></i> Ayuda</span>
+<span><i class="fas fa-bell"></i></span>
+
+<div class="user">
+<img src="https://i.pravatar.cc/30" alt="">
+<span id="usuarioEmail">Cargando...</span>
+</div>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+<h1><i class="fas fa-users"></i> Lista de Clientes</h1>
+
+<!-- Filtros -->
+<div class="card">
+
+<select>
+<option>Seleccione una Zona</option>
+</select>
+
+<button class="btn green">
+<i class="fas fa-plus"></i> Agregar Cliente
+</button>
+
+</div>
+
+
+<div class="card">
+
+<label>Acción:</label>
+
+<select>
+<option>-----------</option>
+</select>
+
+<button class="btn blue">
+<i class="fas fa-play"></i> Ejecutar
+</button>
+
+<span class="muted">0 seleccionados/as</span>
+
+</div>
+
+
+<!-- Barra -->
+<div class="table-toolbar">
+
+<div class="left">
+
+<button class="btn green small">Mostrar 10 registros</button>
+
+<button class="btn light small">
+<i class="fas fa-copy"></i>
+</button>
+
+<button class="btn light small">
+<i class="fas fa-file-excel"></i>
+</button>
+
+<button class="btn light small">
+<i class="fas fa-table"></i> Tabla
+</button>
+
+</div>
+
+<div class="right">
+
+<span>Buscar:</span>
+<input type="text" id="buscador">
+
+</div>
+
+</div>
+
+
+<!-- Tabla -->
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+<th></th>
+<th>Nombre</th>
+<th>Servicio</th>
+<th>Ip</th>
+<th>Estado</th>
+</tr>
+
+</thead>
+
+<tbody id="tablaClientes">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+// obtener token
+const token = localStorage.getItem("token");
+
+// proteger página
+if(!token){
+window.location.href = "login.html";
+}
+
+
+// obtener usuario
+fetch("http://127.0.0.1:8000/api/perfil",{
+method:"GET",
+headers:{
+"Authorization":"Bearer " + token,
+"Content-Type":"application/json"
+}
+})
+.then(res => res.json())
+.then(data => {
+
+document.getElementById("usuarioEmail").textContent = data.usuario.email;
+
+});
+
+
+
+// cargar clientes
+fetch("http://127.0.0.1:8000/api/clientes",{
+method:"GET",
+headers:{
+"Authorization":"Bearer " + token,
+"Content-Type":"application/json"
+}
+})
+.then(res => res.json())
+.then(data => {
+
+let tabla = document.getElementById("tablaClientes");
+
+tabla.innerHTML = "";
+
+data.forEach(cliente => {
+
+tabla.innerHTML += `
+<tr>
+<td><input type="checkbox"></td>
+<td>${cliente.nombre}</td>
+<td>${cliente.servicio}</td>
+<td>${cliente.ip}</td>
+<td><span class="badge active">${cliente.estado}</span></td>
+</tr>
+`;
+
+});
+
+});
+
+
+
+// buscador
+document.getElementById("buscador").addEventListener("keyup", function(){
+
+let filtro = this.value.toLowerCase();
+let filas = document.querySelectorAll("#tablaClientes tr");
+
+filas.forEach(fila => {
+
+let texto = fila.textContent.toLowerCase();
+fila.style.display = texto.includes(filtro) ? "" : "none";
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

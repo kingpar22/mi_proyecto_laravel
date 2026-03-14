@@ -1,103 +1,100 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: Arial, Helvetica, sans-serif;
-}
-
 body{
+font-family:Arial;
 background:#f4f6f9;
+margin:0;
 }
 
-/* Topbar */
+/* topbar */
 
 .topbar{
 background:#3fb35c;
 color:white;
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:10px 20px;
 }
 
-.menu{
-font-size:22px;
-cursor:pointer;
-}
-
-.top-right span{
-margin-left:20px;
-}
-
-/* Container */
+/* container */
 
 .container{
 width:90%;
 margin:auto;
-margin-top:25px;
+margin-top:20px;
 }
 
-h2{
-margin-bottom:20px;
+/* ocultar radios */
+
+input[type="radio"]{
+display:none;
 }
 
-/* Tabs */
+/* tabs */
 
 .tabs{
 display:flex;
 border-bottom:2px solid #ddd;
-margin-bottom:20px;
 }
 
-.tab{
+.tabs label{
 padding:10px 20px;
-border:none;
 background:#eee;
 cursor:pointer;
 margin-right:5px;
 }
 
-.tab.active{
-background:white;
-border-top:3px solid #3fb35c;
-font-weight:bold;
-}
-
-/* Card */
+/* card */
 
 .card{
 background:white;
-padding:25px;
-border-radius:6px;
+padding:20px;
+margin-top:15px;
+border-radius:5px;
 box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Form */
+/* form */
 
 .form-grid{
 display:grid;
-grid-template-columns:200px 1fr;
-gap:15px;
-align-items:center;
+grid-template-columns:220px 1fr;
+gap:12px;
 }
 
-.form-grid input,
-.form-grid select{
+input,select,textarea{
 padding:8px;
 border:1px solid #ccc;
 border-radius:4px;
 }
 
-/* Buttons */
+/* contenido */
+
+.content{
+display:none;
+}
+
+#tab1:checked ~ .tabs label[for="tab1"],
+#tab2:checked ~ .tabs label[for="tab2"],
+#tab3:checked ~ .tabs label[for="tab3"],
+#tab4:checked ~ .tabs label[for="tab4"]{
+background:white;
+border-top:3px solid #3fb35c;
+}
+
+#tab1:checked ~ .card .content1{display:block;}
+#tab2:checked ~ .card .content2{display:block;}
+#tab3:checked ~ .card .content3{display:block;}
+#tab4:checked ~ .card .content4{display:block;}
+
+/* botones */
 
 .buttons{
 margin-top:20px;
 }
 
 .btn-save{
-background:#3fa7ff;
-border:none;
+background:#3498db;
 color:white;
+border:none;
 padding:10px 20px;
 border-radius:4px;
 cursor:pointer;
@@ -107,7 +104,6 @@ cursor:pointer;
 background:#ddd;
 border:none;
 padding:10px 20px;
-border-radius:4px;
-cursor:pointer;
 margin-left:10px;
+border-radius:4px;
 }

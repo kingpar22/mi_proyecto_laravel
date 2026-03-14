@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ZaguNet Dashboard</title>
-    <link rel="stylesheet" href="../css/dashboarad.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    @vite('resources/css/dashboard.css')
 </head>
 <body>
 
@@ -19,7 +18,7 @@
         <nav>
             <ul>
                 <li class="active">Dashboard</li>
-                <li class="active"><a href="../views/Lista_cliente.html">Clientes</a></li>
+                <li class="active"><a href="{{ url('/clientes') }}">Clientes</a></li>
                 <li>Finanzas</li>
                 <li>Sistema</li>
                 <li>Fichas HotSport</li>

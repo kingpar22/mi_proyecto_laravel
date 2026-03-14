@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="../css/Lista_clientes.css">
 </head>
 <title>Lista de Clientes</title>
-<link rel="stylesheet" href="../css/Clientes_buscar.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+ @vite('resources/css/Lista_clientes.css')
 </head>
 <body>
 

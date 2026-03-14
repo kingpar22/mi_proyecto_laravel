@@ -1,152 +1,91 @@
+<?php
+$conn = new mysqli("localhost","root","","zagunet");
+
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+$sql = "SELECT id, nombre FROM planes";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agregar Cliente</title>
- @vite('resources/css/styles.css')
+<title>Registrar Cliente</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<header class="topbar">
-<div class="menu">☰</div>
-<div class="title">Sistema</div>
-
-<div class="top-right">
-<span>Ayuda</span>
-<span class="user">reyli@zagunetwork</span>
-</div>
-</header>
-
 <div class="container">
 
-<h2>➕ Agregar Cliente</h2>
+<h2>Registrar Cliente</h2>
 
-<!-- Radios ocultos -->
-<input type="radio" name="tabs" id="tab1" checked>
-<input type="radio" name="tabs" id="tab2">
-<input type="radio" name="tabs" id="tab3">
-<input type="radio" name="tabs" id="tab4">
-
-<!-- Tabs -->
-<div class="tabs">
-<label for="tab1">Datos de Conexión</label>
-<label for="tab2">Datos del Cliente</label>
-<label for="tab3">Configuración Avanzada</label>
-<label for="tab4">Facturación</label>
-</div>
-
-<div class="card">
-
-<!-- TAB 1 -->
-<div class="content content1">
-
-<h3>Datos de Conexión</h3>
-
-<form class="form-grid">
-
-<label>Nombre Secret PPPoE</label>
-<input type="text" placeholder="0558">
-
-<label>Password PPPoE</label>
-<input type="text" placeholder="3lb0bpsj">
-
-<label>Remote Address PPPoE</label>
-<input type="text">
-
-<label>Local Address PPPoE</label>
-<input type="text">
-
-<label>Mac Cpe</label>
-<input type="text">
-
-<label>Coordenadas</label>
-<input type="text">
-
-<label>Router cliente</label>
-<select>
-<option>Rb_Centralizado_CCR</option>
-</select>
-
-<label>Zona cliente</label>
-<select>
-<option>Rb_Centralizado_CCR</option>
-</select>
-
-<label>Plan internet</label>
-<select>
-<option>----------</option>
-</select>
-
-<label>Sectorial/Nodo/NAP</label>
-<select>
-<option>----------</option>
-</select>
-
-</form>
-
-</div>
-
-<!-- TAB 2 -->
-<div class="content content2">
-
-<h3>Datos del Cliente</h3>
-
-<form class="form-grid">
+<form action="guardar_cliente.php" method="POST" class="form-grid">
 
 <label>Nombre</label>
-<input type="text">
+<input type="text" name="nombre" required>
 
-<label>Apellido</label>
-<input type="text">
+<label>Teléfono</label>
+<input type="number" name="telefono">
 
-<label>DNI/C.I./C.C.</label>
-<input type="text">
-
-<label>Correo electrónico</label>
-<input type="email">
+<label>Email</label>
+<input type="email" name="email">
 
 <label>Dirección</label>
-<textarea></textarea>
+<textarea name="direccion" required></textarea>
 
-<label>Ciudad</label>
-<input type="text">
+<label>Referencia</label>
+<input type="number" name="referencia">
 
-<label>Código Postal</label>
-<input type="text">
+<label>Plan</label>
+<select name="plan_id" required>
 
-<label>Teléfono Celular</label>
-<input type="text">
+<option value="">Seleccione un plan</option>
 
-</form>
+<?php
+while($row = $result->fetch_assoc()){
+?>
+<option value="<?php echo $row['id']; ?>">
+<?php echo $row['nombre']; ?>
+</option>
+<?php
+}
+?>
 
-</div>
+</select>
 
-<!-- TAB 3 -->
-<div class="content content3">
+<label>Usuario PPPoE</label>
+<input type="text" name="usuario_pppoe">
 
-<h3>Configuración Avanzada</h3>
+<label>Password PPPoE</label>
+<input type="text" name="password_pppoe">
 
-<p>Aquí puedes agregar configuraciones avanzadas.</p>
+<label>Fecha de corte</label>
+<input type="date" name="fecha_corte" required>
 
-</div>
+<label>Fecha de instalación</label>
+<input type="date" name="fecha_instalacion">
 
-<!-- TAB 4 -->
-<div class="content content4">
+<label>Último pago</label>
+<input type="date" name="ultimo_pago">
 
-<h3>Facturación</h3>
+<label>Estado</label>
+<select name="estado">
+<option value="1">Activo</option>
+<option value="0">Suspendido</option>
+</select>
 
-<p>Aquí puedes agregar datos de facturación.</p>
-
-</div>
+<label>Observaciones</label>
+<textarea name="observaciones"></textarea>
 
 <div class="buttons">
-<button class="btn-save">Guardar</button>
-<button class="btn-cancel">Cancelar</button>
+<button type="submit" class="btn-save">Guardar Cliente</button>
 </div>
 
-</div>
+</form>
 
 </div>
 

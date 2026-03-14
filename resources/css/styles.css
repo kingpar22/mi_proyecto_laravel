@@ -7,7 +7,7 @@ margin:0;
 /* topbar */
 
 .topbar{
-background:#3fb35c;
+background:linear-gradient(to right, rgb(71, 190, 255), rgb(112, 237, 255));
 color:white;
 display:flex;
 justify-content:space-between;

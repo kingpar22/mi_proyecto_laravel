@@ -178,7 +178,7 @@ body {
 
 .chart .bar {
     flex: 1;
-    background: #4f46e5;
+    background: #00ff51;
     border-radius: 6px 6px 0 0;
     transition: height 0.5s ease;
 }

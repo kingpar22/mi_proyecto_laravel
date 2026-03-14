@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Clientes</title>
-  <link rel="stylesheet" href="../css/Lista_clientes.css">
-</head>
+  </head>
 <title>Lista de Clientes</title>
  @vite('resources/css/Lista_clientes.css')
 </head>
@@ -37,7 +37,9 @@
     <select>
       <option>Seleccione una Zona</option>
     </select>
-    <button class="btn green"><i class="fas fa-plus"></i> Agregar Cliente</button>
+    <a href="{{ route('clientes.create') }}" class="btn green">
+  <i class="fas fa-plus"></i> Agregar Cliente
+</a>
   </div>
 
   <div class="card">

@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClienteController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,3 +35,5 @@ Route::get('/dashboard', function () {
 Route::get('/clientes', function () {
     return view('Lista_cliente'); 
 })->middleware('auth');
+
+Route::get('/clientes/registro', [ClienteController::class, 'create'])->name('clientes.create');

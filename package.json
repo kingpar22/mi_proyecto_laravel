@@ -1,4 +1,4 @@
-{
+ {
   "$schema": "https://www.schemastore.org/package.json",
   "private": true,
   "type": "module",
@@ -29,4 +29,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3"
   }
+
+  
 }
+
+

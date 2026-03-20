@@ -37,3 +37,6 @@ Route::get('/clientes', function () {
 })->middleware('auth');
 
 Route::get('/clientes/registro', [ClienteController::class, 'create'])->name('clientes.create');
+
+
+Route::resource('clientes', ClienteController::class);

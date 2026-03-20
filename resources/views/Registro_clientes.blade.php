@@ -1,91 +1,152 @@
-<?php
-$conn = new mysqli("localhost","root","","zagunet");
-
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
-
-$sql = "SELECT id, nombre FROM planes";
-$result = $conn->query($sql);
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Registrar Cliente</title>
-<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Cliente</title>
+ @vite('resources/css/styles.css')
 </head>
 
 <body>
 
+<header class="topbar">
+<div class="menu">☰</div>
+<div class="title">Sistema</div>
+
+<div class="top-right">
+<span>Ayuda</span>
+<span class="user">reyli@zagunetwork</span>
+</div>
+</header>
+
 <div class="container">
 
-<h2>Registrar Cliente</h2>
+<h2>➕ Agregar Cliente</h2>
 
-<form action="guardar_cliente.php" method="POST" class="form-grid">
+<!-- Radios ocultos -->
+<input type="radio" name="tabs" id="tab1" checked>
+<input type="radio" name="tabs" id="tab2">
+<input type="radio" name="tabs" id="tab3">
+<input type="radio" name="tabs" id="tab4">
 
-<label>Nombre</label>
-<input type="text" name="nombre" required>
-
-<label>Teléfono</label>
-<input type="number" name="telefono">
-
-<label>Email</label>
-<input type="email" name="email">
-
-<label>Dirección</label>
-<textarea name="direccion" required></textarea>
-
-<label>Referencia</label>
-<input type="number" name="referencia">
-
-<label>Plan</label>
-<select name="plan_id" required>
-
-<option value="">Seleccione un plan</option>
-
-<?php
-while($row = $result->fetch_assoc()){
-?>
-<option value="<?php echo $row['id']; ?>">
-<?php echo $row['nombre']; ?>
-</option>
-<?php
-}
-?>
-
-</select>
-
-<label>Usuario PPPoE</label>
-<input type="text" name="usuario_pppoe">
-
-<label>Password PPPoE</label>
-<input type="text" name="password_pppoe">
-
-<label>Fecha de corte</label>
-<input type="date" name="fecha_corte" required>
-
-<label>Fecha de instalación</label>
-<input type="date" name="fecha_instalacion">
-
-<label>Último pago</label>
-<input type="date" name="ultimo_pago">
-
-<label>Estado</label>
-<select name="estado">
-<option value="1">Activo</option>
-<option value="0">Suspendido</option>
-</select>
-
-<label>Observaciones</label>
-<textarea name="observaciones"></textarea>
-
-<div class="buttons">
-<button type="submit" class="btn-save">Guardar Cliente</button>
+<!-- Tabs -->
+<div class="tabs">
+<label for="tab1">Datos de Conexión</label>
+<label for="tab2">Datos del Cliente</label>
+<label for="tab3">Configuración Avanzada</label>
+<label for="tab4">Facturación</label>
 </div>
 
+<div class="card">
+
+<!-- TAB 1 -->
+<div class="content content1">
+
+<h3>Datos de Conexión</h3>
+
+<form class="form-grid">
+
+<label>Nombre Secret PPPoE</label>
+<input type="text" placeholder="0558">
+
+<label>Password PPPoE</label>
+<input type="text" placeholder="3lb0bpsj">
+
+<label>Remote Address PPPoE</label>
+<input type="text">
+
+<label>Local Address PPPoE</label>
+<input type="text">
+
+<label>Mac Cpe</label>
+<input type="text">
+
+<label>Coordenadas</label>
+<input type="text">
+
+<label>Router cliente</label>
+<select>
+<option>Rb_Centralizado_CCR</option>
+</select>
+
+<label>Zona cliente</label>
+<select>
+<option>Rb_Centralizado_CCR</option>
+</select>
+
+<label>Plan internet</label>
+<select>
+<option>----------</option>
+</select>
+
+<label>Sectorial/Nodo/NAP</label>
+<select>
+<option>----------</option>
+</select>
+
 </form>
+
+</div>
+
+<!-- TAB 2 -->
+<div class="content content2">
+
+<h3>Datos del Cliente</h3>
+
+<form class="form-grid">
+
+<label>Nombre</label>
+<input type="text">
+
+<label>Apellido</label>
+<input type="text">
+
+<label>DNI/C.I./C.C.</label>
+<input type="text">
+
+<label>Correo electrónico</label>
+<input type="email">
+
+<label>Dirección</label>
+<textarea></textarea>
+
+<label>Ciudad</label>
+<input type="text">
+
+<label>Código Postal</label>
+<input type="text">
+
+<label>Teléfono Celular</label>
+<input type="text">
+
+</form>
+
+</div>
+
+<!-- TAB 3 -->
+<div class="content content3">
+
+<h3>Configuración Avanzada</h3>
+
+<p>Aquí puedes agregar configuraciones avanzadas.</p>
+
+</div>
+
+<!-- TAB 4 -->
+<div class="content content4">
+
+<h3>Facturación</h3>
+
+<p>Aquí puedes agregar datos de facturación.</p>
+
+</div>
+
+<div class="buttons">
+<button class="btn-save">Guardar</button>
+<button class="btn-cancel">Cancelar</button>
+</div>
+
+</div>
 
 </div>
 

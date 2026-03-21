@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return "Bienvenido al Sistema de Administración de Internet";
+         return view('dashboard');
     }
 }

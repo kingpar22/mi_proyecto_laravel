@@ -4,39 +4,33 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UsuarioController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
+use Illuminate\Support\Facades\Route;
 
-
+// Página de inicio
 Route::get('/', function () {
     return view('welcome');
 });
- 
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
-Route::get('/usuario/{nombre}', [UsuarioController::class, 'mostrar']);
-
-
-Route::get('/verificar-servicio', [ServicioController::class, 'verificarPago']);
-
-
-
-
+// Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Dashboard protegido por login
-Route::get('/dashboard', function () {
-    return view('dashboard'); // tu vista dashboard.blade.php
-})->middleware('auth');
+// Dashboard protegido
+Route::middleware('auth')->group(function () {
 
-Route::get('/clientes', function () {
-    return view('Lista_cliente'); 
-})->middleware('auth');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/clientes/registro', [ClienteController::class, 'create'])->name('clientes.create');
+    // Clientes
+    Route::get('/clientes/registro', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
 
+    // Recurso completo de clientes (opcional si quieres todas las acciones REST)
+    Route::resource('clientes', ClienteController::class)->except(['create', 'index']); 
 
-Route::resource('clientes', ClienteController::class);
+    // Otros servicios
+    Route::get('/verificar-servicio', [ServicioController::class, 'verificarPago']);
+    Route::get('/usuario/{nombre}', [UsuarioController::class, 'mostrar']);
+});

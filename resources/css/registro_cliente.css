@@ -1,0 +1,147 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.form-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Alertas de error */
+.alert-error {
+    background: #ffdddd;
+    border-left: 4px solid #dc3545;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+}
+.alert-error ul {
+    list-style: none;
+}
+.alert-error li {
+    font-size: 14px;
+    color: #a94442;
+}
+
+/* Tabs radios ocultos */
+input[name="tabs"] {
+    display: none;
+}
+
+/* Labels como tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.tabs label {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    background: #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+input#tab1:checked ~ .tabs label[for="tab1"],
+input#tab2:checked ~ .tabs label[for="tab2"],
+input#tab3:checked ~ .tabs label[for="tab3"],
+input#tab4:checked ~ .tabs label[for="tab4"] {
+    background: #007bff;
+    color: #fff;
+}
+
+/* Card contenido de tabs */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cada contenido de tab */
+.content {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+input#tab1:checked ~ .card .content1,
+input#tab2:checked ~ .card .content2,
+input#tab3:checked ~ .card .content3,
+input#tab4:checked ~ .card .content4 {
+    display: flex;
+}
+
+/* Labels e Inputs */
+label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+}
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Botones */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+.btn-save {
+    background: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn-save:hover {
+    background: #218838;
+}
+.btn-cancel {
+    background: #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.btn-cancel:hover {
+    background: #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tabs { flex-direction: column; }
+    .buttons { flex-direction: column; gap: 10px; }
+}

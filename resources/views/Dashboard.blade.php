@@ -1,106 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>ZaguNet Dashboard</title>
-    @vite('resources/css/dashboard.css')
-</head>
-<body>
+@extends('layouts.app')
 
-<div class="container">
+@section('title', 'Dashboard')
+@section('page-title', 'Dashboard')
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">ZaguNet</div>
+@section('content')
+<section class="cards">
+    <div class="card">
+        <h4>Pagos Internet</h4>
+        <div class="big-number">$2,800.00</div>
+        <small>Pendiente - 37 pagos</small>
+    </div>
+    <div class="card">
+        <h4>Clientes</h4>
+        <div class="big-number">443</div>
+        <small>Total</small>
+    </div>
+    <div class="card">
+        <h4>Tickets</h4>
+        <div class="big-number">0</div>
+        <small>Pendientes</small>
+    </div>
+</section>
 
-        <div class="user-role">Administrador</div>
+<section class="traffic">
+    <div class="traffic-box">
+        <h4>Tráfico</h4>
+        <div>0 GiB</div>
+        <small>Total Descarga</small>
+    </div>
+    <div class="traffic-box">
+        <h4>&nbsp;</h4>
+        <div>0 GiB</div>
+        <small>Total Subida</small>
+    </div>
+</section>
 
-        <nav>
-            <ul>
-                <li class="active">Dashboard</li>
-                <li class="active"><a href="{{ url('/clientes') }}">Clientes</a></li>
-                <li>Finanzas</li>
-                <li>Sistema</li>
-                <li>Fichas HotSport</li>
-            </ul>
-        </nav>
-
-        <div class="logout">Cerrar sesión</div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main">
-
-        <!-- Top Bar -->
-        <header class="topbar">
-            <h2>Dashboard</h2>
-            <div class="top-actions">
-                <span>Ayuda</span>
-                <span>🔔</span>
-                <span>Admin</span>
-            </div>
-        </header>
-
-        <!-- Cards Row -->
-        <section class="cards">
-
-            <div class="card">
-                <h4>Pagos Internet</h4>
-                <div class="big-number">$2,800.00</div>
-                <small>Pendiente - 37 pagos</small>
-            </div>
-
-            <div class="card">
-                <h4>Clientes</h4>
-                <div class="big-number">443</div>
-                <small>Total</small>
-            </div>
-
-            <div class="card">
-                <h4>Tickets</h4>
-                <div class="big-number">0</div>
-                <small>Pendientes</small>
-            </div>
-
-        </section>
-
-        <!-- Traffic Boxes -->
-        <section class="traffic">
-            <div class="traffic-box">
-                <h4>Tráfico</h4>
-                <div>0 GiB</div>
-                <small>Total Descarga</small>
-            </div>
-
-            <div class="traffic-box">
-                <h4>&nbsp;</h4>
-                <div>0 GiB</div>
-                <small>Total Subida</small>
-            </div>
-        </section>
-
-        <!-- Chart Section -->
-        <section class="chart-section">
-            <h4>Historial de Finanzas</h4>
-
-            <div class="chart">
-                <div class="bar" style="height:60%"></div>
-                <div class="bar" style="height:50%"></div>
-                <div class="bar" style="height:65%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:80%"></div>
-                <div class="bar" style="height:88%"></div>
-                <div class="bar" style="height:95%"></div>
-            </div>
-
-        </section>
-
-    </main>
-</div>
-
-</body>
-</html>
+<section class="chart-section">
+    <h4>Historial de Finanzas</h4>
+    <div class="chart">
+        <div class="bar" style="height:60%"></div>
+        <div class="bar" style="height:50%"></div>
+        <div class="bar" style="height:65%"></div>
+        <div class="bar" style="height:80%"></div>
+        <div class="bar" style="height:88%"></div>
+        <div class="bar" style="height:95%"></div>
+    </div>
+</section>
+@endsection

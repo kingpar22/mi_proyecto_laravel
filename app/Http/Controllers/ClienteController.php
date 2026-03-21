@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Plan;
+use App\Http\Requests\StoreClienteRequest;
 
 class ClienteController extends Controller
 {
@@ -11,27 +13,35 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        return view('clientes.Registro_clientes', compact('clientes'));
+        $planes = Plan::where('estado', 1)->get(); // 👈 IMPORTANTE
+
+        return view('clientes.Lista_cliente', compact('clientes','planes'));
     }
 
     // FORM CREAR
     public function create()
     {
-        return view('clientes.Registro_clientes');
+        $planes = Plan::where('estado', 1)->get();
+
+        return view('clientes.Registro_clientes', compact('planes'));
     }
 
     // GUARDAR
-    public function store(Request $request)
-    {
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index');
-    }
+   public function store(StoreClienteRequest $request)
+{
+    Cliente::create($request->all());
+
+    return redirect()->route('clientes.index')
+        ->with('success', 'Cliente guardado correctamente');
+}
 
     // EDITAR
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
-        return view('clientes.Registro_clientes', compact('cliente'));
+        $planes = Plan::where('estado', 1)->get();
+
+        return view('clientes.Registro_clientes', compact('cliente','planes'));
     }
 
     // ACTUALIZAR

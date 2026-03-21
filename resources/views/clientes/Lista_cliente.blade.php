@@ -1,110 +1,97 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<head>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Clientes</title>
-  </head>
-<title>Lista de Clientes</title>
- @vite('resources/css/Lista_clientes.css')
-</head>
-<body>
+@extends('layouts.app')
 
-<!-- Topbar -->
-<header class="topbar">
-  <div class="top-left">
-    <button class="menu-btn"><i class="fas fa-bars"></i></button>
-  </div>
-  <div class="top-right">
-    <span><i class="fas fa-question-circle"></i> Ayuda</span>
-    <span><i class="fas fa-bell"></i></span>
-    <div class="user">
-      <img src="https://i.pravatar.cc/30" alt="">
-      <span>reyli@zagunetwork</span>
-    </div>
-  </div>
-</header>
+@section('title', 'Lista de Clientes')
 
-<div class="container">
+@section('content')
+<h1><i class="fas fa-users"></i> Lista de Clientes</h1>
 
-  <h1><i class="fas fa-users"></i> Lista de Clientes</h1>
-
-  <!-- Filtros superiores -->
-  <div class="card">
+<!-- Filtros superiores -->
+<div class="card">
     <select>
       <option>Seleccione una Zona</option>
     </select>
     <a href="{{ route('clientes.create') }}" class="btn green">
-  <i class="fas fa-plus"></i> Agregar Cliente
-</a>
-  </div>
+        <i class="fas fa-plus"></i> Agregar Cliente
+    </a>
+</div>
 
-  <div class="card">
+<div class="card">
     <label>Acción:</label>
     <select>
       <option>-----------</option>
     </select>
     <button class="btn blue"><i class="fas fa-play"></i> Ejecutar</button>
     <span class="muted">0 seleccionados/as</span>
-  </div>
+</div>
 
-  <!-- Barra de acciones -->
-  <div class="table-toolbar">
+<!-- Barra de acciones -->
+<div class="table-toolbar">
     <div class="left">
-      <button class="btn green small">Mostrar 10 registros</button>
-      <button class="btn light small"><i class="fas fa-copy"></i></button>
-      <button class="btn light small"><i class="fas fa-file-excel"></i></button>
-      <button class="btn light small"><i class="fas fa-table"></i> Tabla</button>
+        <button class="btn green small">Mostrar 10 registros</button>
+        <button class="btn light small"><i class="fas fa-copy"></i></button>
+        <button class="btn light small"><i class="fas fa-file-excel"></i></button>
+        <button class="btn light small"><i class="fas fa-table"></i> Tabla</button>
     </div>
 
     <div class="right">
-      <span>Buscar:</span>
-      <input type="text">
+        <span>Buscar:</span>
+        <input type="text">
     </div>
-  </div>
-
-  <!-- Tabla -->
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Nombre</th>
-          <th>Servicio</th>
-          <th>Ip</th>
-          <th>Estado</th>
-        </tr>
-        <tr class="filters">
-          <th></th>
-          <th><input type="text" placeholder="Buscar Nombre"></th>
-          <th><input type="text" placeholder="Buscar Servicio"></th>
-          <th><input type="text" placeholder="Buscar Ip"></th>
-          <th><input type="text" placeholder="Buscar Estado"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="checkbox"></td>
-          <td>Julbia Hernandez Garcia</td>
-          <td>467_SV_JHONATAN</td>
-          <td>192.168.17.213</td>
-          <td><span class="badge active">Activo</span></td>
-        </tr>
-        <tr>
-          <td><input type="checkbox"></td>
-          <td>Bernardo Espinoza Aguilar</td>
-          <td>463_SV_AGUILAR</td>
-          <td>192.168.17.218</td>
-          <td><span class="badge active">Activo</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
 </div>
 
-</body>
-</html>
+<!-- Tabla -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Código Postal</th>
+                <th>Referencia</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Usuario PPPoE</th>
+                <th>Password PPPoE</th>
+                <th>Fecha Instalación</th>
+                <th>Fecha Corte</th>
+                <th>Último Pago</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($clientes as $cliente)
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>{{ $cliente->id }}</td>
+                <td>{{ $cliente->nombre }}</td>
+                <td>{{ $cliente->apellido }}</td>
+                <td>{{ $cliente->telefono }}</td>
+                <td>{{ $cliente->direccion }}</td>
+                <td>{{ $cliente->codigo_postal }}</td>
+                <td>{{ $cliente->referencia }}</td>
+                <td>{{ $cliente->email }}</td>
+                <td>{{ $cliente->plan ? $cliente->plan->nombre : '-' }}</td>
+                <td>{{ $cliente->usuario_pppoe }}</td>
+                <td>{{ $cliente->password_pppoe }}</td>
+                <td>{{ $cliente->fecha_instalacion }}</td>
+                <td>{{ $cliente->fecha_corte }}</td>
+                <td>{{ $cliente->ultimo_pago }}</td>
+                <td>
+                    @if($cliente->estado)
+                        <span class="badge active">Activo</span>
+                    @else
+                        <span class="badge inactive">Inactivo</span>
+                    @endif
+                </td>
+                <td>{{ $cliente->observaciones }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection
